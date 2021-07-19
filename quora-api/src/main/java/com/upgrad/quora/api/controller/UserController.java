@@ -6,6 +6,7 @@ import com.upgrad.quora.service.business.UserBusinessService;
 import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class UserController {
         user.setUuid(UUID.randomUUID().toString());
         user.setFirstName(signupUserRequest.getFirstName());
         user.setLastName(signupUserRequest.getLastName());
+        user.setUserName(signupUserRequest.getUserName());
         user.setEmail(signupUserRequest.getEmailAddress());
         user.setPassword(signupUserRequest.getPassword());
         user.setCountry(signupUserRequest.getCountry());
@@ -36,5 +38,9 @@ public class UserController {
 
         final User createdUser = userBusinessService.signup(user);
 
+        SignupUserResponse signupUserResponse = new SignupUserResponse();
+        signupUserResponse.id(createdUser.getUuid()).status("USER SUCCESSFULLY REGISTERED");
+
+        return new ResponseEntity<SignupUserResponse>(signupUserResponse, HttpStatus.CREATED);
     }
 }
