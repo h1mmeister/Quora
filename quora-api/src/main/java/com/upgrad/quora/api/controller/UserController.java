@@ -5,8 +5,11 @@ import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
 import com.upgrad.quora.service.business.UserBusinessService;
 import com.upgrad.quora.service.entity.User;
+import com.upgrad.quora.service.entity.UserAuthEntity;
+import com.upgrad.quora.service.exception.AuthenticationFailedException;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +50,13 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) {
-
+    public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
+        UserAuthEntity userAuthEntity = userBusinessService.signin(authorization);
+        User user = userAuthEntity.getUser();
+        SigninResponse signinResponse = new SigninResponse();
+        signinResponse.id(user.getUuid()).message("SIGNED IN SUCCESSFULLY");
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("access_token", userAuthEntity.getAccessToken());
+        return new ResponseEntity<SigninResponse>(signinResponse, headers, HttpStatus.OK);
     }
 }
