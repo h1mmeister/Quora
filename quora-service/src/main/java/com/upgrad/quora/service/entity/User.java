@@ -25,12 +25,12 @@ public class User implements Serializable {
     @Size(max = 200)
     private String uuid;
 
-    @Column(name = "firstname")
+    @Column(name = "first_name")
     @NotNull
     @Size(max = 30)
     private String firstName;
 
-    @Column(name = "lastname")
+    @Column(name = "last_name")
     @NotNull
     @Size(max = 30)
     private String lastName;
@@ -71,7 +71,7 @@ public class User implements Serializable {
     @Size(max = 30)
     private String dob;
 
-    @Column(name = "contactnumber")
+    @Column(name = "contact_number")
     @Size(max = 30)
     private String contactNumber;
 
