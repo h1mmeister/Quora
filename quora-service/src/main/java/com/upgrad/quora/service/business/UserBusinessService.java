@@ -1,5 +1,7 @@
 package com.upgrad.quora.service.business;
 
+import com.upgrad.quora.service.common.GenericErrorCode;
+import com.upgrad.quora.service.common.UnexpectedException;
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.entity.UserAuthEntity;
@@ -41,27 +43,34 @@ public class UserBusinessService {
     }
 
     public UserAuthEntity signin(String authorization) throws AuthenticationFailedException {
-        byte[] decode = Base64.getDecoder().decode(authorization.split("Basic ")[1]);
-        String decodeText = new String(decode);
-        String[] decodedArray = decodeText.split(":");
-        String username = decodedArray[0];
-        String password = decodedArray[1];
-        User user = userDao.getUserByUserName(username);
-        if(user == null) {
-            throw new AuthenticationFailedException("ATH-001", "This username does not exist");
+        try {
+            byte[] decode = Base64.getDecoder().decode(authorization.split("Basic ")[1]);
+            String decodeText = new String(decode);
+            String[] decodedArray = decodeText.split(":");
+            String username = decodedArray[0];
+            String password = decodedArray[1];
+            User user = userDao.getUserByUserName(username);
+            if(user == null) {
+                throw new AuthenticationFailedException("ATH-001", "This username does not exist");
+            }
+            final String encryptedPassword = cryptographyProvider.encrypt(password, user.getSalt());
+            if(encryptedPassword.equals(user.getPassword())) {
+                JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
+                UserAuthEntity userAuthEntity = new UserAuthEntity();
+                userAuthEntity.setUser(user);
+                final ZonedDateTime now = ZonedDateTime.now();
+                final ZonedDateTime expiresAt = now.plusHours(8);
+                userAuthEntity.setAccessToken(jwtTokenProvider.generateToken(user.getUuid(), now, expiresAt));
+                userAuthEntity.setLoginAt(now);
+                userAuthEntity.setExpiresAt(expiresAt);
+                userAuthEntity.setUuid(user.getUuid());
+                return userDao.createAuthToken(userAuthEntity);
+            } else {
+                throw new AuthenticationFailedException("ATH-002", "Password failed");
+            }
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException ex) {
+            GenericErrorCode genericErrorCode = GenericErrorCode.GEN_001;
+            throw new UnexpectedException(genericErrorCode, ex);
         }
-        final String encryptedPassword = cryptographyProvider.encrypt(password, user.getSalt());
-        if(encryptedPassword.equals(user.getPassword())) {
-        JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
-        UserAuthEntity userAuthEntity = new UserAuthEntity();
-        userAuthEntity.setUser(user);
-        final ZonedDateTime now = ZonedDateTime.now();
-        final ZonedDateTime expiresAt = now.plusHours(8);
-        userAuthEntity.setAccessToken(jwtTokenProvider.generateToken(user.getUuid(), now, expiresAt));
-        userAuthEntity.setLoginAt(now);
-        userAuthEntity.setExpiresAt(expiresAt);
-        userAuthEntity.setUuid(user.getUuid());
-        }
-
     }
 }

@@ -38,6 +38,10 @@ public class UserDao {
         }
     }
 
-    public UserAuthEntity createAuthToken
+    // persist the auth data in database
+    public UserAuthEntity createAuthToken(final UserAuthEntity userAuthEntity) {
+        entityManager.persist(userAuthEntity);
+        return userAuthEntity;
+    }
 
 }
