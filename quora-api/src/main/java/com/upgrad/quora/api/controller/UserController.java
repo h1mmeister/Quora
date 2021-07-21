@@ -1,6 +1,7 @@
 package com.upgrad.quora.api.controller;
 
 import com.upgrad.quora.api.model.SigninResponse;
+import com.upgrad.quora.api.model.SignoutResponse;
 import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
 import com.upgrad.quora.service.business.UserBusinessService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.attribute.standard.Media;
 import java.util.UUID;
 
 @RestController
@@ -59,4 +61,11 @@ public class UserController {
         headers.add("access_token", userAuthEntity.getAccessToken());
         return new ResponseEntity<SigninResponse>(signinResponse, headers, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/user/signout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String authorization) {
+
+    }
+
+
 }
