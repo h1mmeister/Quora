@@ -44,12 +44,17 @@ public class UserDao {
         return userAuthEntity;
     }
 
+    // retrieves the user auth record matched with the access token passed
     public UserAuthEntity getUserAuthToken(final String accessToken) {
         try {
             return entityManager.createNamedQuery("userAuthByAccessToken", UserAuthEntity.class).setParameter("accessToken", accessToken).getSingleResult();
         }catch(NoResultException nre) {
             return null;
         }
+    }
+
+    public void updateUserAuthEntity(final UserAuthEntity updatedUserAuthEntity){
+        entityManager.merge(updatedUserAuthEntity);
     }
 
 }
