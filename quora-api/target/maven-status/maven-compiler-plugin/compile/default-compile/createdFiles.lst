@@ -17,6 +17,7 @@ com\upgrad\quora\api\model\SignupUserRequest.class
 io\swagger\api\ApiOriginFilter.class
 io\swagger\Swagger2SpringBoot$ExitException.class
 com\upgrad\quora\api\controller\UserController.class
+com\upgrad\quora\api\exception\RestExceptionHandler.class
 io\swagger\api\NotFoundException.class
 com\upgrad\quora\api\model\QuestionEditRequest.class
 io\swagger\RFC3339DateFormat.class

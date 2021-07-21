@@ -6,6 +6,7 @@ C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\j
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\ServiceConfiguration.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\dao\UserDao.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\business\JwtTokenProvider.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\entity\UserAuthEntity.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AnswerNotFoundException.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AuthenticationFailedException.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AuthorizationFailedException.java

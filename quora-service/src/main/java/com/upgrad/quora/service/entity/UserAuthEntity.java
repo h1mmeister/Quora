@@ -18,7 +18,7 @@ public class UserAuthEntity implements Serializable {
 
 
     @Id
-    @Column(name = "id")
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -29,24 +29,24 @@ public class UserAuthEntity implements Serializable {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     @NotNull
     private User user;
 
-    @Column(name = "access_token")
+    @Column(name = "ACCESS_TOKEN")
     @NotNull
     @Size(max = 500)
     private String accessToken;
 
-    @Column(name = "login_at")
+    @Column(name = "LOGIN_AT")
     @NotNull
     private ZonedDateTime loginAt;
 
-    @Column(name = "expires_at")
+    @Column(name = "EXPIRES_AT")
     @NotNull
     private ZonedDateTime expiresAt;
 
-    @Column(name = "logout_at")
+    @Column(name = "LOGOUT_AT")
     private ZonedDateTime logoutAt;
 
     public Integer getId() {
