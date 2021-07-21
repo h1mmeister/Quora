@@ -73,4 +73,14 @@ public class UserBusinessService {
             throw new UnexpectedException(genericErrorCode, ex);
         }
     }
+
+    public String getUserUUID(String authorization) {
+        String[] bearerToken = authorization.split("Bearer ");
+        if(bearerToken != null && bearerToken.length > 1) {
+            authorization = bearerToken[1];
+        }
+
+        userDao.
+
+    }
 }
