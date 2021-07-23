@@ -8,6 +8,7 @@ import com.upgrad.quora.service.entity.UserAuthEntity;
 import com.upgrad.quora.service.exception.AuthenticationFailedException;
 import com.upgrad.quora.service.exception.SignOutRestrictedException;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -90,7 +91,11 @@ public class UserBusinessService {
         }
     }
 
-    public User getUser(final String userUuid, final String authorization) {
-
+    public User getUser(final String userUuid, final String authorization) throws UserNotFoundException {
+        final User user = userDao.getUserByUUID(userUuid);
+        if(user == null) {
+            throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
+        }
+        return user;
     }
 }
