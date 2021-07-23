@@ -89,4 +89,8 @@ public class UserBusinessService {
             throw new SignOutRestrictedException("SGR-001", "User is not Signed in");
         }
     }
+
+    public User getUser(final String userUuid, final String authorization) {
+
+    }
 }

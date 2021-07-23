@@ -38,6 +38,15 @@ public class UserDao {
         }
     }
 
+    // retrieves the user detail matched with the userId passed
+    public User getUserByUUID(final String userUuid) {
+        try {
+            return entityManager.createNamedQuery("userByUUID", User.class).setParameter("uuid", userUuid).getSingleResult();
+        }catch(NoResultException nre) {
+            return null;
+        }
+    }
+
     // persist the auth data in database
     public UserAuthEntity createAuthToken(final UserAuthEntity userAuthEntity) {
         entityManager.persist(userAuthEntity);
