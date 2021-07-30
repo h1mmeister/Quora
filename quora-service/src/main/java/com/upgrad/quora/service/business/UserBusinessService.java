@@ -5,10 +5,7 @@ import com.upgrad.quora.service.common.UnexpectedException;
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.entity.UserAuthEntity;
-import com.upgrad.quora.service.exception.AuthenticationFailedException;
-import com.upgrad.quora.service.exception.SignOutRestrictedException;
-import com.upgrad.quora.service.exception.SignUpRestrictedException;
-import com.upgrad.quora.service.exception.UserNotFoundException;
+import com.upgrad.quora.service.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -91,7 +88,23 @@ public class UserBusinessService {
         }
     }
 
-    public User getUser(final String userUuid, final String authorization) throws UserNotFoundException {
+    public UserAuthEntity validateUserAuthentication(String authorization, String athr002Message) throws AuthorizationFailedException {
+        String[] bearerToken = authorization.split("Bearer ");
+        if(bearerToken != null && bearerToken.length > 1) {
+            authorization = bearerToken[1];
+        }
+        UserAuthEntity userAuthEntity = userDao.getUserAuthToken(authorization);
+        if (userAuthEntity == null) {
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        }
+        if (userAuthEntity.getLogoutAt() != null) {
+            throw new AuthorizationFailedException("ATHR-002", athr002Message);
+        }
+        return userAuthEntity;
+    }
+
+    public User getUser(final String userUuid, final String authorization) throws UserNotFoundException, AuthorizationFailedException {
+        UserAuthEntity userAuthEntity = validateUserAuthentication(authorization, "User is signed out.Sign in first to get user details");
         final User user = userDao.getUserByUUID(userUuid);
         if(user == null) {
             throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
