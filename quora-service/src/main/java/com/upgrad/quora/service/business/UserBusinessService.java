@@ -41,6 +41,7 @@ public class UserBusinessService {
         return userDao.createUser(user);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthEntity signin(String authorization) throws AuthenticationFailedException {
         try {
             byte[] decode = Base64.getDecoder().decode(authorization.split("Basic ")[1]);
@@ -73,6 +74,7 @@ public class UserBusinessService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String getUserUUID(String authorization) throws SignOutRestrictedException {
         String[] bearerToken = authorization.split("Bearer ");
         if(bearerToken != null && bearerToken.length > 1) {
@@ -104,7 +106,7 @@ public class UserBusinessService {
     }
 
     public User getUser(final String userUuid, final String authorization) throws UserNotFoundException, AuthorizationFailedException {
-        UserAuthEntity userAuthEntity = validateUserAuthentication(authorization, "User is signed out.Sign in first to get user details");
+        UserAuthEntity userAuthEntity = validateUserAuthentication(authorization, "User is signed out. Sign in first to get user details");
         final User user = userDao.getUserByUUID(userUuid);
         if(user == null) {
             throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
