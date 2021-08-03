@@ -31,6 +31,5 @@ public class QuestionController {
         QuestionResponse questionResponse = new QuestionResponse();
         questionResponse.id(createdQuestion.getUuid()).status("QUESTION CREATED");
         return new ResponseEntity<QuestionResponse>(questionResponse, HttpStatus.CREATED);
-
     }
 }
