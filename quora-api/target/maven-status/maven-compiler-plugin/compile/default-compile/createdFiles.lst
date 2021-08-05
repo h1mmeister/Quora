@@ -1,7 +1,9 @@
 com\upgrad\quora\api\model\UserDeleteResponse.class
+com\upgrad\quora\api\controller\AdminController.class
 io\swagger\configuration\HomeController.class
 com\upgrad\quora\api\model\AnswerResponse.class
 com\upgrad\quora\api\model\AnswerDetailsResponse.class
+com\upgrad\quora\api\controller\CommonController.class
 io\swagger\api\ApiResponseMessage.class
 com\upgrad\quora\api\QuoraApiApplication.class
 com\upgrad\quora\api\model\QuestionEditResponse.class
@@ -15,6 +17,7 @@ com\upgrad\quora\api\model\SignupUserResponse.class
 io\swagger\Swagger2SpringBoot.class
 com\upgrad\quora\api\model\SignupUserRequest.class
 io\swagger\api\ApiOriginFilter.class
+com\upgrad\quora\api\controller\QuestionController.class
 io\swagger\Swagger2SpringBoot$ExitException.class
 com\upgrad\quora\api\controller\UserController.class
 com\upgrad\quora\api\exception\RestExceptionHandler.class

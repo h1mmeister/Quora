@@ -11,6 +11,7 @@ C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generat
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\AnswerEditRequest.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\QuestionEditRequest.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\ErrorResponse.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\src\main\java\com\upgrad\quora\api\controller\AdminController.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\QuestionDeleteResponse.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\UserDeleteResponse.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\io\swagger\api\NotFoundException.java
@@ -21,7 +22,9 @@ C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generat
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\QuestionRequest.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\SignoutResponse.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\src\main\java\com\upgrad\quora\api\QuoraApiApplication.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\src\main\java\com\upgrad\quora\api\controller\QuestionController.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\src\main\java\com\upgrad\quora\api\config\SwaggerConfiguration.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\src\main\java\com\upgrad\quora\api\controller\CommonController.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\io\swagger\RFC3339DateFormat.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\UserDetailsResponse.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-api\target\generated-sources\.\com\upgrad\quora\api\model\AnswerEditResponse.java
