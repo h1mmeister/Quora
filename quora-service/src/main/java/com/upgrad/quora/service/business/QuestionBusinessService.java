@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Service
 public class QuestionBusinessService {
@@ -27,5 +28,10 @@ public class QuestionBusinessService {
         question.setUser(userAuthEntity.getUser());
         Question createdQuestion = questionDao.createQuestion(question);
         return createdQuestion;
+    }
+
+    public List<Question> getAllQuestions(String authorization) throws AuthorizationFailedException {
+        UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to get all questions");
+        return questionDao.getAllQuestions();
     }
 }
