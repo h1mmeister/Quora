@@ -36,6 +36,7 @@ public class QuestionBusinessService {
         return questionDao.getAllQuestions();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Question editedQuestion(Question question, String questionId, String authorization) throws AuthorizationFailedException, InvalidQuestionException {
         UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to edit the question");
         Question questionToBeEdited = questionDao.getQuestionByUUID(questionId);
