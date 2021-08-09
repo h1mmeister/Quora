@@ -51,4 +51,17 @@ public class QuestionBusinessService {
         questionToBeEdited.setContent(question.getContent());
         return questionDao.updateEditedQuestion(questionToBeEdited);
     }
+
+    public String deleteQuestion(String questionId, String authorization) throws AuthorizationFailedException, InvalidQuestionException {
+        UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to delete a question");
+        Question question = questionDao.getQuestionByUUID(questionId);
+        if(question == null) {
+            throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
+        }
+        if("admin".equalsIgnoreCase(userAuthEntity.getUser().getRole()) || question.getUser().getId() == userAuthEntity.getUser().getId()) {
+            questionDao.deleteQuestion(question);
+            return question.getUuid();
+        }
+        throw new AuthorizationFailedException("ATHR-003", "Only the question owner or admin can delete the question");
+    }
 }
