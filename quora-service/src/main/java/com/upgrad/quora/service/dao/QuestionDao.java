@@ -41,7 +41,14 @@ public class QuestionDao {
         return question;
     }
 
+    // deleting the question
     public void deleteQuestion(Question question) {
         entityManager.remove(question);
+    }
+
+    // finding all the questions by
+    public List<Question> findQuestionsByUser(Integer userId) {
+        return entityManager.createNamedQuery("questionByUserId", Question.class).setParameter("userId", userId).getResultList();
+
     }
 }
