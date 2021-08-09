@@ -59,5 +59,11 @@ public class QuestionController {
         String questionUuid = questionBusinessService.deleteQuestion(questionId, authorization);
         QuestionDeleteResponse questionDeleteResponse = new QuestionDeleteResponse();
         questionDeleteResponse.id(questionUuid).status("QUESTION DELETED");
+        return new ResponseEntity<QuestionDeleteResponse>(questionDeleteResponse, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "question/all/{userId}")
+    public ResponseEntity<QuestionDetailsResponse> getAllQuestionsByUser(@PathVariable("userId") final String userId, @RequestHeader("authorization") final String authorization) {
+
     }
 }
