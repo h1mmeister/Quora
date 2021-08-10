@@ -1,5 +1,7 @@
 package com.upgrad.quora.api.controller;
 
+import com.upgrad.quora.api.model.AnswerEditRequest;
+import com.upgrad.quora.api.model.AnswerEditResponse;
 import com.upgrad.quora.api.model.AnswerRequest;
 import com.upgrad.quora.api.model.AnswerResponse;
 import com.upgrad.quora.service.business.AnswerBusinessService;
@@ -12,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -31,6 +34,13 @@ public class AnswerController {
         AnswerResponse answerResponse = new AnswerResponse();
         answerResponse.id(updatedAnswer.getUuid()).status("ANSWER CREATED");
         return new ResponseEntity<AnswerResponse>(answerResponse, HttpStatus.CREATED)
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/answer/edit/{answerId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<AnswerEditResponse> editAnswerContent(final AnswerEditRequest answerEditRequest, @PathVariable("answerId") final String answerId, @RequestHeader("authorization") final String authorization) {
+        final Answer answer = new Answer();
+        answer.setAns(answerEditRequest.getContent());
+        Answer editedAnswer = answerBusinessService.editAnswerContent(answer, answerId, authorization);
 
     }
 }

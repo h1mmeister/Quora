@@ -32,4 +32,8 @@ public class AnswerBusinessService {
         answer.setUser(userAuthEntity.getUser());
         return answerDao.createAnswer(answer)
     }
+
+    public Answer editAnswerContent(final Answer answer, final String answerId, final String authorization) throws AuthorizationFailedException {
+        UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to post an answer");
+    }
 }
