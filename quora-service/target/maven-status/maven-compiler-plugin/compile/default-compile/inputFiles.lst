@@ -2,6 +2,7 @@ C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\j
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\common\GenericErrorCode.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\common\ErrorCode.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\SignUpRestrictedException.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\business\AnswerBusinessService.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\business\QuestionBusinessService.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\common\UnexpectedException.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\ServiceConfiguration.java
@@ -10,8 +11,10 @@ C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\j
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\entity\UserAuthEntity.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AnswerNotFoundException.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AuthenticationFailedException.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\entity\Answer.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\business\AdminBusinessService.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AuthorizationFailedException.java
+C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\dao\AnswerDao.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\business\PasswordCryptographyProvider.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\exception\UserNotFoundException.java
 C:\Users\himanshuy\Downloads\pgdse\Projects\Quora\Quora\quora-service\src\main\java\com\upgrad\quora\service\entity\User.java

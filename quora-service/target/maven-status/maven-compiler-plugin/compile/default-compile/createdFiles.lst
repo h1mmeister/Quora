@@ -14,8 +14,11 @@ com\upgrad\quora\service\exception\InvalidQuestionException.class
 com\upgrad\quora\service\business\PasswordCryptographyProvider.class
 com\upgrad\quora\service\exception\AuthorizationFailedException.class
 com\upgrad\quora\service\ServiceConfiguration.class
+com\upgrad\quora\service\business\AnswerBusinessService.class
+com\upgrad\quora\service\dao\AnswerDao.class
 com\upgrad\quora\service\business\AdminBusinessService.class
 com\upgrad\quora\service\exception\AuthenticationFailedException.class
 com\upgrad\quora\service\dao\UserDao.class
+com\upgrad\quora\service\entity\Answer.class
 com\upgrad\quora\service\exception\SignUpRestrictedException.class
 com\upgrad\quora\service\business\QuestionBusinessService.class

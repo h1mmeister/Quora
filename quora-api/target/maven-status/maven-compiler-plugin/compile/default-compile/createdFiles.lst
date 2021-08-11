@@ -21,6 +21,7 @@ com\upgrad\quora\api\controller\QuestionController.class
 io\swagger\Swagger2SpringBoot$ExitException.class
 com\upgrad\quora\api\controller\UserController.class
 com\upgrad\quora\api\exception\RestExceptionHandler.class
+com\upgrad\quora\api\controller\AnswerController.class
 io\swagger\api\NotFoundException.class
 com\upgrad\quora\api\model\QuestionEditRequest.class
 io\swagger\RFC3339DateFormat.class
