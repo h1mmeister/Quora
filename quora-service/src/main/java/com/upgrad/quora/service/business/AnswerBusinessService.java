@@ -48,4 +48,19 @@ public class AnswerBusinessService {
         editAnswer.setAns(answer.getAns());
         return answerDao.updateAnswerContent(editAnswer);
     }
+
+    public String deleteAnswer(final String answerId, final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
+        UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to delete an answer");
+        Answer answer = answerDao.getAnswerByUuid(answerId);
+        if(answer == null) {
+            throw new AnswerNotFoundException("ANS-001", "Entered answer uuid does not exist");
+        }
+        else {
+            if("nonadmin".equalsIgnoreCase(userAuthEntity.getUser().getRole()) || answer.getUser().getId() == userAuthEntity.getUser().getId()) {
+                answerDao.deleteAnswer(answer);
+                return answer.getUuid();
+            }
+            throw new AuthorizationFailedException("ATHR-003", "Only the answer owner or admin can delete the answer");
+        }
+    }
 }
