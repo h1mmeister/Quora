@@ -12,8 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -31,7 +32,7 @@ public class AnswerController {
         Answer updatedAnswer = answerBusinessService.createAnswer(answer, questionId, authorization);
         AnswerResponse answerResponse = new AnswerResponse();
         answerResponse.id(updatedAnswer.getUuid()).status("ANSWER CREATED");
-        return new ResponseEntity<AnswerResponse>(answerResponse, HttpStatus.CREATED)
+        return new ResponseEntity<AnswerResponse>(answerResponse, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/answer/edit/{answerId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -51,4 +52,17 @@ public class AnswerController {
        answerDeleteResponse.id(answerDeleteResponse.getId()).status("ANSWER DELETED");
        return new ResponseEntity<AnswerDeleteResponse>(answerDeleteResponse, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "answer/all/{questionId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<AnswerDetailsResponse>> getAllAnswersToQuestion(@PathVariable("questionId") final String questionId, @RequestHeader("authorization") final String authorization) throws InvalidQuestionException, AuthorizationFailedException {
+       List<Answer> allAnswersToQuestions = answerBusinessService.getAllAnswersToQuestions(questionId, authorization);
+        List<AnswerDetailsResponse> answerDetailsResponseList = new ArrayList<AnswerDetailsResponse>();
+        for(Answer answer: allAnswersToQuestions) {
+            AnswerDetailsResponse answerDetailsResponse = new AnswerDetailsResponse();
+            answerDetailsResponse.id(answer.getUuid()).questionContent(answer.getQuestion().getContent()).answerContent(answer.getAns());
+            answerDetailsResponseList.add(answerDetailsResponse);
+        }
+        return new ResponseEntity<List<AnswerDetailsResponse>>(answerDetailsResponseList, HttpStatus.OK);
+    }
+
 }

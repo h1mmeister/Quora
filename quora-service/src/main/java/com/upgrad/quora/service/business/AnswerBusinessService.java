@@ -11,6 +11,8 @@ import com.upgrad.quora.service.exception.InvalidQuestionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AnswerBusinessService {
 
@@ -31,7 +33,7 @@ public class AnswerBusinessService {
         }
         answer.setQuestion(question);
         answer.setUser(userAuthEntity.getUser());
-        return answerDao.createAnswer(answer)
+        return answerDao.createAnswer(answer);
     }
 
     public Answer editAnswerContent(final Answer answer, final String answerId, final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
@@ -62,5 +64,14 @@ public class AnswerBusinessService {
             }
             throw new AuthorizationFailedException("ATHR-003", "Only the answer owner or admin can delete the answer");
         }
+    }
+
+    public List<Answer> getAllAnswersToQuestions(final String questionId, final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
+        UserAuthEntity userAuthEntity = userBusinessService.validateUserAuthentication(authorization, "User is signed out.Sign in first to get the answers");
+        Question question = questionDao.getQuestionByUUID(questionId);
+        if(question == null) {
+            throw new InvalidQuestionException("QUES-001", "The question with entered uuid whose details are to be seen does not exist");
+        }
+        return answerDao.getAllAnswersToQuestions(question.getId());
     }
 }

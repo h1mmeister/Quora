@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class AnswerDao {
@@ -37,5 +38,9 @@ public class AnswerDao {
     // deleting the answer from the database
     public void deleteAnswer(Answer answer) {
         entityManager.remove(answer);
+    }
+
+    public List<Answer> getAllAnswersToQuestions(Integer questionId){
+        return entityManager.createNamedQuery("answerByQuestionId", Answer.class).setParameter("questionId", questionId).getResultList();
     }
 }
