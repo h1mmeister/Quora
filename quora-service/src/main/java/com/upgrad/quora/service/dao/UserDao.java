@@ -21,7 +21,7 @@ public class UserDao {
     }
 
     // retrieves the user record matching with the username passed
-    public User getUserByUserName(final String username) {
+    public User getUserByUserName(String username) {
         try {
             return entityManager.createNamedQuery("userByUserName", User.class).setParameter("userName", username).getSingleResult();
         } catch(NoResultException nre) {
@@ -30,7 +30,7 @@ public class UserDao {
     }
 
     // retrieves the user record matching with the email passed
-    public User getUserByEmail(final String email) {
+    public User getUserByEmail(String email) {
         try {
             return entityManager.createNamedQuery("userByEmail", User.class).setParameter("email", email).getSingleResult();
         } catch(NoResultException nre) {

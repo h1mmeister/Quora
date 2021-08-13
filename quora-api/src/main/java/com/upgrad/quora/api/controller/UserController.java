@@ -23,12 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/")
 public class UserController {
     
     @Autowired
     private UserBusinessService userBusinessService;
 
+    /**
+     * This method registers a user with all the details provided and handles the
+     * scenario when user provides empty or invalid username/email and throws an error message
+     *
+     * @param signupUserRequest holds all the details keyed in by the user at the time of signup
+     * @return UUID of the registered user for further login
+     * @throws SignUpRestrictedException if the user provides invalid username/email
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
         final User user = new User();
@@ -44,10 +51,8 @@ public class UserController {
         user.setContactNumber(signupUserRequest.getContactNumber());
 
         final User createdUser = userBusinessService.signup(user);
-
         SignupUserResponse signupUserResponse = new SignupUserResponse();
         signupUserResponse.id(createdUser.getUuid()).status("USER SUCCESSFULLY REGISTERED");
-
         return new ResponseEntity<SignupUserResponse>(signupUserResponse, HttpStatus.CREATED);
     }
 
