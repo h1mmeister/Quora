@@ -51,6 +51,15 @@ public class UserBusinessService {
         return userDao.createUser(user);
     }
 
+    /**
+     * This method takes the authorization string which is encoded with username and password
+     * If the username and password doesn't matches then it throws AuthenticationFailedException
+     * If the username and password matches then an auth token is generated
+     *
+     * @param authorization holds the username and password (encoded) used for authentication
+     * @return userAuthTokenEntity that contains access token and user UUID
+     * @throws AuthenticationFailedException if the username doesn't exists or password doesn't match
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthEntity signin(String authorization) throws AuthenticationFailedException {
         try {
@@ -63,13 +72,13 @@ public class UserBusinessService {
             if(user == null) {
                 throw new AuthenticationFailedException("ATH-001", "This username does not exist");
             }
-            final String encryptedPassword = cryptographyProvider.encrypt(password, user.getSalt());
+            String encryptedPassword = cryptographyProvider.encrypt(password, user.getSalt());
             if(encryptedPassword.equals(user.getPassword())) {
                 JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
                 UserAuthEntity userAuthEntity = new UserAuthEntity();
                 userAuthEntity.setUser(user);
-                final ZonedDateTime now = ZonedDateTime.now();
-                final ZonedDateTime expiresAt = now.plusHours(8);
+                ZonedDateTime now = ZonedDateTime.now();
+                ZonedDateTime expiresAt = now.plusHours(8);
                 userAuthEntity.setAccessToken(jwtTokenProvider.generateToken(user.getUuid(), now, expiresAt));
                 userAuthEntity.setLoginAt(now);
                 userAuthEntity.setExpiresAt(expiresAt);

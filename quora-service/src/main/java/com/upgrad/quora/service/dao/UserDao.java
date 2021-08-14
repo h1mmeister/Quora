@@ -38,6 +38,14 @@ public class UserDao {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // persist the auth data in database
+    public UserAuthEntity createAuthToken(UserAuthEntity userAuthEntity) {
+        entityManager.persist(userAuthEntity);
+        return userAuthEntity;
+    }
+
     // retrieves the user detail matched with the userId passed
     public User getUserByUUID(final String userUuid) {
         try {
@@ -46,13 +54,7 @@ public class UserDao {
             return null;
         }
     }
-
-    // persist the auth data in database
-    public UserAuthEntity createAuthToken(final UserAuthEntity userAuthEntity) {
-        entityManager.persist(userAuthEntity);
-        return userAuthEntity;
-    }
-
+    
     // retrieves the user auth record matched with the access token passed
     public UserAuthEntity getUserAuthToken(final String accessToken) {
         try {
