@@ -56,6 +56,14 @@ public class UserController {
         return new ResponseEntity<SignupUserResponse>(signupUserResponse, HttpStatus.CREATED);
     }
 
+    /**
+     * This method is used to sign in a user who has successfully registered
+     * If not,throws an error message that the username does not exist or password is wrong
+     *
+     * @param authorization this contains the encoded username and password
+     * @return signin response which contains user UUID and message stating whether user has successfully signed in or not
+     * @throws AuthenticationFailedException will be thrown when the username or password does not match
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
         UserAuthEntity userAuthEntity = userBusinessService.signin(authorization);
