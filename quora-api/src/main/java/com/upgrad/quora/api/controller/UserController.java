@@ -75,12 +75,20 @@ public class UserController {
         return new ResponseEntity<SigninResponse>(signinResponse, headers, HttpStatus.OK);
     }
 
+    /**
+     * This method signs out the user from the application
+     *
+     * @param authorization holds the access token generated at the time of sign in and is used for authentication
+     * @return UUID of the use̥r and a message stating signed out successfully
+     * @throws SignOutRestrictedException when the user session is inactive or he/she never signed in before
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String authorization) throws SignOutRestrictedException {
-        String uuid = userBusinessService.getUserUUID(authorization);
+        String uuid = userBusinessService.getUserByUUID(authorization);
         SignoutResponse signoutResponse = new SignoutResponse();
-        signoutResponse.setId(uuid);
-        signoutResponse.setMessage("SIGNED OUT SUCCESSFULLY");
+        signoutResponse.id(uuid).message("SIGNED OUT SUCCESSFULLY");
+        // signoutResponse.setId(uuid);
+        // signoutResponse.setMessage("SIGNED OUT SUCCESSFULLY");
         return new ResponseEntity<SignoutResponse>(signoutResponse, HttpStatus.OK);
     }
 

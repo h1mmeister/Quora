@@ -93,8 +93,17 @@ public class UserBusinessService {
         }
     }
 
+    /**
+     * This method validates the user session by making use of the access token
+     * If it is expired or invalid, then throws back the exception asking the user to sign in
+     * If the user session is active, then pulls the UUID of the user̥
+     *
+     * @param authorization holds the Bearer access token for authenticating the user
+     * @return uuid of the user
+     * @throws SignOutRestrictedException if the access token is expired or user never signed in
+     */
     @Transactional(propagation = Propagation.REQUIRED)
-    public String getUserUUID(String authorization) throws SignOutRestrictedException {
+    public String getUserByUUID(String authorization) throws SignOutRestrictedException {
         String[] bearerToken = authorization.split("Bearer ");
         if(bearerToken != null && bearerToken.length > 1) {
             authorization = bearerToken[1];
